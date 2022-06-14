@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "743884451490",
+    "firebase_url": "https://mercado-b50b2-default-rtdb.firebaseio.com",
+    "project_id": "mercado-b50b2",
+    "storage_bucket": "mercado-b50b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743884451490:android:6514afed1d7105c02d31fb",
+        "android_client_info": {
+          "package_name": "com.example.mercado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743884451490-abk3v0pb1jrefnp12k39e586n99gaao6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlKorVr7TKrB5Ta4ylAQDQhbB3paVKbCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743884451490-abk3v0pb1jrefnp12k39e586n99gaao6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743884451490:android:89c18c7e3c585aec2d31fb",
+        "android_client_info": {
+          "package_name": "com.projetos.leonardoqs.lq_marketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743884451490-abk3v0pb1jrefnp12k39e586n99gaao6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlKorVr7TKrB5Ta4ylAQDQhbB3paVKbCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743884451490-abk3v0pb1jrefnp12k39e586n99gaao6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
