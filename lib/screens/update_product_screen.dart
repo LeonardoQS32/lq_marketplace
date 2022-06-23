@@ -139,19 +139,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
                               FirebaseService firebase = FirebaseService();
-                              firebase.updateProducts(widget.product,
-                                  onSucess: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            "Produto atualizado com sucesso.")));
-                                Navigator.of(context).pop();
-                              }, onFail: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            "Falha ao atualizar produto.")));
-                              });
+                              firebase.updateProducts(widget.product);
+                              Navigator.of(context).pop();
                             }
                           },
                           child: const Text("Atualizar"),

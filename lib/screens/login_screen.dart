@@ -104,9 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           const HomeScreen()));
                             }, onFail: (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("Erro ao tentar entrar.")));
-                              Text("$e");
+                                  SnackBar(
+                                      content:
+                                          Text("Erro ao tentar entrar: $e")));
                             });
                           }
                         },

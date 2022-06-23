@@ -7,6 +7,7 @@ class AdministrativePage extends StatelessWidget {
 // Lista das opções que aparece na tela
   final List itensList = [
     {"labelText": "Deposito", "icon": Icons.border_all},
+    {"labelText": "Vendas", "icon": Icons.shopping_cart_sharp}
   ];
 
   @override

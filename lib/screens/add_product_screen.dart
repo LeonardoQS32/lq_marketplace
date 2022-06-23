@@ -36,12 +36,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            ListView.separated(
-                                itemBuilder: (context, index) =>
-                                    SizedBox(width: 40, height: 40),
-                                separatorBuilder: (context, index) =>
-                                    SizedBox(height: 40),
-                                itemCount: 5),
                             TextFormField(
                               initialValue: product.name,
                               onSaved: (value) => product.name = value,

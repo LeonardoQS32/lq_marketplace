@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:lq_marketplace/models/Product.dart';
 import 'package:lq_marketplace/models/shopping_cart.dart';
 import '../models/Person.dart';
 
 class FirebaseService {
-  static Person? person;
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -21,11 +18,11 @@ class FirebaseService {
       User? user = (await _auth.signInWithEmailAndPassword(
               email: person.email!, password: person.password!))
           .user;
-      FirebaseService.person = person;
-      FirebaseService.person!.id = user!.uid;
+      person.id = user!.uid;
       onSucess!();
-    } on PlatformException catch (e) {
-      onFail!(debugPrint(e.toString()));
+    } catch (e) {
+      debugPrint("Erro = ${e.toString()}");
+      onFail!(e.toString());
     }
   }
 
@@ -39,9 +36,11 @@ class FirebaseService {
               email: person.email!, password: person.password!))
           .user;
       person.id = user!.uid;
+      user.updateDisplayName(person.name);
       onSucess!();
     } catch (e) {
-      onFail!(debugPrint(e.toString()));
+      debugPrint("Erro = ${e.toString()}");
+      onFail!(e.toString());
     }
   }
 
@@ -59,19 +58,11 @@ class FirebaseService {
     }
   }
 
-  updateProducts(Product product,
-      {Function? onSucess, Function? onFail}) async {
-    try {
-      await _firestore
-          .collection("products")
-          .doc(product.id)
-          .update(product.toMap());
-      onSucess!();
-    } on Exception {
-      // ignore: todo
-      // TODO
-      onFail!();
-    }
+  updateProducts(Product product) async {
+    await _firestore
+        .collection("products")
+        .doc(product.id)
+        .update(product.toMap());
   }
 
   deleteProduct(String idProduct) async {
@@ -90,5 +81,47 @@ class FirebaseService {
         .get()
         .then((value) => x = value.get("qnt"));
     return x;
+  }
+
+  Person getUser() {
+    User user = _auth.currentUser!;
+    return Person.fromMap(
+        {"id": user.uid, "name": user.displayName, "email": user.email});
+  }
+
+  userLogout({Function? onSucess, Function? onFail}) async {
+    try {
+      await _auth.signOut();
+      onSucess!();
+    } catch (e) {
+      onFail!(e.toString());
+    }
+  }
+
+  resetInformation(
+    Person person, {
+    Function? onSucess,
+    Function? onFail,
+  }) async {
+    try {
+      await _auth.currentUser?.updateDisplayName(person.name);
+      await _auth.currentUser?.updateEmail(person.email!);
+      onSucess!();
+    } catch (e) {
+      onFail!(e.toString());
+    }
+  }
+
+  resetPassword(
+    String newPassword, {
+    Function? onSucess,
+    Function? onFail,
+  }) async {
+    try {
+      await _auth.currentUser?.updatePassword(newPassword);
+      onSucess!();
+    } catch (e) {
+      onFail!(e.toString());
+    }
   }
 }

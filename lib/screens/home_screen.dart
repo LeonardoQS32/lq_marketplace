@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lq_marketplace/pages/administrative_page.dart';
 import 'package:lq_marketplace/pages/sales_page.dart';
+import 'package:lq_marketplace/pages/user_perfil_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _listPages.add(const SalesPage());
     _listPages.add(AdministrativePage());
+    _listPages.add(const UserPerfilPage());
   }
 
   @override
@@ -43,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.admin_panel_settings_outlined),
                 label: "Administrativo"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_pin), label: "Perfil"),
           ]),
     );
   }

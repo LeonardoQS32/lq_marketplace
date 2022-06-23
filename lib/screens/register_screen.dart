@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lq_marketplace/models/Person.dart';
-
+import 'package:lq_marketplace/tools/validator.dart';
 import '../tools/firebase_service.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -13,11 +13,15 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Person person = Person();
-  //late String _confirmPassword;
+  late String _confirmPassword;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Cadastrar"),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 5, right: 5, bottom: 8, top: 28),
         child: Column(
@@ -79,6 +83,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               if (value == null || value.isEmpty) {
                                 return 'Por favor, insira um email.';
                               }
+                              if (!emailValidator(value)) {
+                                return 'Email invalido, por favor insira um email valido.';
+                              }
                               return null;
                             },
                           ),
@@ -104,6 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               if (value.length < 6) {
                                 return 'A senha precisa ter 6 caracteres no minimo.';
                               }
+                              _confirmPassword = value;
                               return null;
                             },
                           ),
@@ -111,7 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 16,
                           ),
                           TextFormField(
-                            initialValue: person.password,
+                            initialValue: "",
                             onSaved: (value) => person.password = value,
                             obscureText: true,
                             decoration: InputDecoration(
@@ -125,6 +133,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Por favor, insira a senha novamente.';
+                              }
+                              if (value != _confirmPassword) {
+                                return 'Por favor, repita a senha corretamente.';
                               }
                               return null;
                             },
@@ -142,15 +153,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            person.adm = false;
                             FirebaseService firebaseService = FirebaseService();
                             firebaseService.signUp(person, onSucess: () {
                               Navigator.of(context).pop();
-                            }, onFail: () {
+                            }, onFail: (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text("Erro ao tentar cadastrar.")));
+                                  SnackBar(
+                                      content: Text(
+                                          "Erro ao tentar cadastrar: $e")));
                             });
                           }
                         },
