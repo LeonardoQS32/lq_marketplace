@@ -51,6 +51,11 @@ class FirebaseService {
   addVendas(ShoppingCart cart) {
     DocumentReference doc = _firestore.collection("sales").doc();
     doc.set(cart.toMap());
+    _firestore.collection("sales/${doc.id}/personAbought").add({
+      "id": cart.personBought.id,
+      "name": cart.personBought.name,
+      "email": cart.personBought.email,
+    });
     for (int i = 0; i < cart.listProducts.length; i++) {
       _firestore
           .collection("sales/${doc.id}/products")
@@ -71,6 +76,26 @@ class FirebaseService {
 
   Stream<QuerySnapshot> getProducts() {
     return _firestore.collection("products").snapshots();
+  }
+
+  Stream<QuerySnapshot> getSales() {
+    return _firestore.collection("sales").snapshots();
+  }
+
+  Stream<QuerySnapshot> getPersonAbouth(String id) {
+    return _firestore
+        .collection("sales")
+        .doc(id)
+        .collection("personAbought")
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getProductsSold(String? id) {
+    return _firestore
+        .collection("sales")
+        .doc(id)
+        .collection("products")
+        .snapshots();
   }
 
   getQntProduct(String idProduct) async {

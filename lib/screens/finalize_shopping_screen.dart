@@ -151,7 +151,7 @@ class _FinalizeShoppingScreenState extends State<FinalizeShoppingScreen> {
   finalizeShopping() async {
     FirebaseService firebaseService = FirebaseService();
     widget.cart.formPayment = formPaymentList[op];
-    // print(widget.cart.toMap());
+    widget.cart.personBought = firebaseService.getUser();
     await firebaseService.addVendas(widget.cart);
 
     for (int i = 0; i < widget.cart.listProducts.length; i++) {

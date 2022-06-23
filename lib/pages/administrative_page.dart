@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lq_marketplace/screens/deposit_screen.dart';
+import 'package:lq_marketplace/screens/list_sales_screen.dart';
 
 class AdministrativePage extends StatelessWidget {
   AdministrativePage({Key? key}) : super(key: key);
@@ -56,6 +57,11 @@ class AdministrativePage extends StatelessWidget {
       case 0:
         Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const DepositScreen()));
+        break;
+
+      case 1:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ListSalesScreen()));
         break;
     }
   }

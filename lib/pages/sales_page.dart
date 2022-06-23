@@ -21,7 +21,7 @@ class _SalesPageState extends State<SalesPage> {
 
   @override
   Widget build(BuildContext context) {
-    cart = ShoppingCart(listProduct);
+    cart = ShoppingCart(listProducts: listProduct);
     return Scaffold(
         body: Padding(
             padding: const EdgeInsets.all(5),

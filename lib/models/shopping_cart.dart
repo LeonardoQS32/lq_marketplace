@@ -1,13 +1,15 @@
 // ignore: unused_import
-import 'package:lq_marketplace/models/product.dart';
+import 'package:lq_marketplace/models/Person.dart';
 
 class ShoppingCart {
   late String? id;
   List listProducts = [];
-  late double amount;
-  late String formPayment;
+  late double? amount;
+  late String? formPayment;
+  late Person personBought;
 
-  ShoppingCart(this.listProducts);
+  ShoppingCart(
+      {required this.listProducts, this.amount, this.formPayment, this.id});
 
   void calculateAmount() {
     double x = 0;

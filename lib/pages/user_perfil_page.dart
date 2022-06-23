@@ -20,9 +20,6 @@ class _UserPerfilPageState extends State<UserPerfilPage> {
   @override
   Widget build(BuildContext context) {
     person = firebaseService.getUser();
-    print("Email: ${person.email}");
-    //person = Person.fromMap(
-    //   {"name": "Leonardo", "email": "leonardoqueiroz@email.com"});
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
